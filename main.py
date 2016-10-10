@@ -1,3 +1,5 @@
+from .user import Incidencia, get_db_session
+
 def clean_incidence(raw_incidence):
     result = {}
     raw_attributes = [item for item in raw_incidence.split("\n") if item != '']
@@ -39,9 +41,10 @@ def extract_data(data):
         
     return result
 
+def insert_incidences_into_db(incidences):
+    
+
 if __name__ == "__main__":
     file_data = load_and_clean_data("resources/inc2006.xml")
     incidences = extract_data(file_data)
     
-    for incidence in incidences:
-        print(str(incidence))
