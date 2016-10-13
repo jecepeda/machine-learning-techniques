@@ -3,4 +3,4 @@ venv/
 __pycache__/
 \#*
 \.\#*
-sql_alchemy_example.db
+sqlalchemy_example.db

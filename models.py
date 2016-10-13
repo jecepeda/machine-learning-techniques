@@ -14,7 +14,7 @@ class Incidencia(Base):
     provincia = Column(String, default="unknown")
     matricula = Column(String, default="unknown")
     causa = Column(String, default="unknown")
-    fecha_hora_ini = Column(DateTime, datetime.now())
+    fechahora_ini = Column(DateTime, default=None)
     nivel = Column(String, default="unknown")
     carretera = Column(String, default="unknown")
     pk_inicial = Column(Float, default=1)
