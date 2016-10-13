@@ -60,7 +60,7 @@ def insert_incidences_into_db(incidences, db):
 
     for incidence in incidences:
         incidence_object = Incidencia()
-        if incidence['provincia'] is 'BIZKAIA':
+        if incidence['provincia'] == 'BIZKAIA':
             for key in incidence.keys():
                 if incidence[key] is not '':
                     incidence_object.__setattr__(key, turn_to_datatype(key, incidence[key]))
