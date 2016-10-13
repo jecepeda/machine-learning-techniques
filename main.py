@@ -75,7 +75,7 @@ def turn_to_datatype(attrib, value):
 
     if attrib in float_attrib:
         return float(value)
-    elif attrib is "DateTime":
+    elif attrib == "fechahora_ini":
         return convert_to_date_time(value)
     else:
         return value
@@ -83,8 +83,9 @@ def turn_to_datatype(attrib, value):
 #Convierte una string a formato DateTime
 #return el valor convertido
 def convert_to_date_time(value):
-    value =  datetime.strptime(value, '%Y-%m-%d %T')
-    return value
+    ret =  datetime.strptime(value, '%Y-%m-%d %H:%M:%S')
+    print(ret)
+    return ret
 
 
 if __name__ == "__main__":
