@@ -60,10 +60,12 @@ def insert_incidences_into_db(incidences, db):
 
     for incidence in incidences:
         incidence_object = Incidencia()
-        for key in incidence.keys():
-            if incidence[key] is not '':
-                incidence_object.__setattr__(key, turn_to_datatype(key, incidence[key]))
-        db.add(incidence_object)
+        if incidence['provincia'] is 'GUIPUZKOA':
+            for key in incidence.keys():
+                if incidence[key] is not '':
+                    incidence_object.__setattr__(key, turn_to_datatype(key, incidence[key]))
+            db.add(incidence_object)
+
     db.commit()
 
 #Convierte una string a float, int, DateTime, o lo mantiene en string dependiendo del attrib
@@ -81,8 +83,9 @@ def turn_to_datatype(attrib, value):
 #Convierte una string a formato DateTime
 #return el valor convertido
 def convert_to_date_time(value):
-    value =  datetime.strptime('Jun 1 2005  1:33PM', '%b %d %Y %I:%M%p')
+    value =  datetime.strptime(value, '%Y-%m-%d %T')
     return value
+
 
 if __name__ == "__main__":
     file_data = load_and_clean_data("resources/inc2006.xml")
