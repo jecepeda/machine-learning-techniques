@@ -11,6 +11,7 @@ class Incidencia(Base):
     id = Column(Integer, primary_key=True)
     tipo = Column(String, default="unknown")
     autonomia = Column(String, default="unknown")
+    provincia = Column(String, default="unknown")
     matricula = Column(String, default="unknown")
     causa = Column(String, default="unknown")
     fecha_hora_ini = Column(DateTime, default=datetime.now())
