@@ -4,3 +4,4 @@ __pycache__/
 \#*
 \.\#*
 sqlalchemy_example.db
+incidences.db
