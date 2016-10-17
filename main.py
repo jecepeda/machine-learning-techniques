@@ -7,11 +7,9 @@ def execute_main():
     load_and_plot_data();
 
 def retrieve_data(db='incidences.db', data='*', tipo='Accidente'):
-    ret = []
     conn = sqlite3.connect(db)
-    d = conn.execute("SELECT "+ data +" FROM Incidencia WHERE tipo='"+ tipo +"';")
-    for row in d:
-        ret.append(row)
+    query_result = conn.execute("SELECT {} FROM Incidencia WHERE tipo = '{}';".format(data, tipo))
+    ret= [row for row in query_result]
 
     return ret
 
