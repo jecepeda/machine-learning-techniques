@@ -17,15 +17,7 @@ def retrieve_data(db='incidences.db', data='*', tipo='Accidente'):
 
 def plot_data(data):
     plt.scatter([row[0] for row in data],[row[1] for row in data])
-    #
-    #unique_labels = set(labels)
-    #colors = plt.cm.Spectral(np.linspace(0,1, len(unique_labels)))
-    #
-    #for k, col in zip(unique_labels, colors):
-    #    if k == -1:
-    #        col ='k'
-
-    plt.title('HOLA EQUISDE')
+    plt.title('Accidentes Graph')
     plt.show()
 
 def load_and_plot_data():
