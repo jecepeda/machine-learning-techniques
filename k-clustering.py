@@ -6,10 +6,7 @@ import math
 from sklearn.datasets import make_blobs
 
 data = retrieve_data()
-X = [row[0] for row in data]
-y = [row[1] for row in data]
-print(X)
-print(y)
+X = data
 
 n_of_elements = 7930
 init = 'random'
@@ -18,15 +15,13 @@ max_iter = 300
 tol = 1e-04
 random_state = 0
 
-def n_of_clusters_and_distortion(data, iters=10):
+def n_of_clusters_and_distortion(data, iters=50):
     sqrt_elements = int(math.sqrt(n_of_elements))
-    print(sqrt_elements)
-    range_clusters = range(sqrt_elements, sqrt_elements + iters)
+    range_clusters = range(sqrt_elements - iters, sqrt_elements + iters, 10)
     distortions = []
     silhouettes = []
     for i in range_clusters:
-        km = KMeans(i, init, n_init=iterations ,max_iter=max_iter, tol = tol,random_state = random_state)
-        print("{} {}".format(sqrt_elements, i))
+        km = KMeans(i, init, n_init=iterations , max_iter=max_iter, tol=tol, random_state=random_state)
         labels = km.fit_predict(X)
         distortions.append(km.inertia_)
         silhouettes.append(metrics.silhouette_score(X, labels))
