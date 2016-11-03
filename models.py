@@ -1,3 +1,5 @@
+import sqlite3
+import matplotlib.pyplot as plt
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import session
 from sqlalchemy import Column, Integer, String, DateTime, Float, create_engine
@@ -32,3 +34,15 @@ def get_db_session(path_to_db):
     Base.metadata.bind = engine
     DBSession = session.sessionmaker(bind=engine)
     return DBSession()
+
+def retrieve_data(db='incidences.db', data='latitud, longitud', tipo='Accidente'):
+    conn = sqlite3.connect(db)
+    query_result = conn.execute("SELECT {} FROM Incidencia WHERE tipo = '{}';".format(data, tipo))
+    ret= [row for row in query_result]
+
+    return ret
+
+def plot_data(data, labels = 'b', title= 'default'):
+    plt.scatter([row[0] for row in data],[row[1] for row in data], c=labels)
+    plt.title(title)
+    plt.show()

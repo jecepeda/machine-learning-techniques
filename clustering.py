@@ -1,20 +1,9 @@
-import sqlite3
-import matplotlib.pyplot as plt
 from sklearn import neighbors
 from sklearn.neighbors import kneighbors_graph
 from sklearn.cluster import DBSCAN as dbscan
-
-def retrieve_data(db='incidences.db', data='*', tipo='Accidente'):
-    conn = sqlite3.connect(db)
-    query_result = conn.execute("SELECT {} FROM Incidencia WHERE tipo = '{}';".format(data, tipo))
-    ret= [row for row in query_result]
-
-    return ret
-
-def plot_data(data, labels = 'b', title= 'default'):
-    plt.scatter([row[0] for row in data],[row[1] for row in data], c=labels)
-    plt.title(title)
-    plt.show()
+from sklearn import metrics
+import numpy as np
+from models import retrieve_data, plot_data
 
 def load_and_plot_data():
     data = retrieve_data(data="longitud, latitud")
@@ -26,6 +15,8 @@ def plot_cluster_data(accident_locations, minimum_points, eps=0.10):
     n_of_clusters = len(set(labels)) - (1 if -1 in labels else 0)
     title = "dbscan: eps:{} Clusters:{}".format(eps, n_of_clusters)
     plot_data(accident_locations, labels, title)
+    print("Silhouette Coefficient: %0.3f"
+      % metrics.silhouette_score(np.asarray(data), labels))
     
 def plot_eps(data):
     dist = neighbors.DistanceMetric.get_metric('euclidean')
