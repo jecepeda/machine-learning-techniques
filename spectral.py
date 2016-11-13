@@ -8,7 +8,7 @@ from models import retrieve_data
 
 data = retrieve_data()
 
-n_of_clusters = 130 # Optimal K value (from k-means)
+n_of_clusters = 110 # Optimal K value (from k-means)
 
 
 def apply_spectral(datai, n_of_clustersi):
@@ -29,7 +29,8 @@ def apply_spectral(datai, n_of_clustersi):
 
     spectral = cluster.SpectralClustering(n_clusters = n_of_clustersi, eigen_solver='arpack', affinity="nearest_neighbors")
     spectral.fit(X)
-    if hasattr(spectral, 'labels_'):
+
+    if hasattr(spectral, '_labels'):
         labels = spectral.labels_.astype(np.int)
     else:
         labels = spectral.predict(X)

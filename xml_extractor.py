@@ -129,3 +129,6 @@ def get_incidences_from_xml(f_path="resources/inc2006.xml"):
     session = get_db_session("sqlite:///{}".format(path_to_db))
 
     insert_incidences_into_db(incidences, session)
+
+if __name__ == '__main__':
+    get_incidences_from_xml()

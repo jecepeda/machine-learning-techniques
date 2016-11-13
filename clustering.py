@@ -14,10 +14,11 @@ def plot_cluster_data(accident_locations, minimum_points, eps=0.10):
     labels = dbscan(eps=eps, min_samples=minimum_points).fit_predict(accident_locations)
     n_of_clusters = len(set(labels)) - (1 if -1 in labels else 0)
     title = "dbscan: eps:{} Clusters:{}".format(eps, n_of_clusters)
+    print(labels)
     plot_data(accident_locations, labels, title)
     print("Silhouette Coefficient: %0.3f"
       % metrics.silhouette_score(np.asarray(data), labels))
-    
+
 def plot_eps(data):
     dist = neighbors.DistanceMetric.get_metric('euclidean')
     mat_sim = dist.pairwise(data)
@@ -36,4 +37,4 @@ def plot_eps(data):
 
 if __name__ == "__main__":
     data = load_and_plot_data()
-    plot_cluster_data(data, minimum_points=10, eps=0.0180)
+    plot_cluster_data(data, minimum_points=10, eps=0.01)
