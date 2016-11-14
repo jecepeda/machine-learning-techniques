@@ -7,6 +7,15 @@ from datetime import datetime
 
 Base = declarative_base()
 
+class Cluster(Base):
+    __tablename__ = "clusters"
+    id = Column(Integer, primary_key=True)
+    num_cluster = Column(Integer, default=0)
+    accidents = Column(Integer, default=0)
+    nivel_medio = Column(String, default='unknown')
+    carretera = Column(String, default='unknown')
+    causa_ppal = Column(String, default='unknown')
+
 class Incidencia(Base):
     __tablename__ = "incidencia"
 
@@ -24,6 +33,7 @@ class Incidencia(Base):
     sentido = Column(String, default=1)
     longitud = Column(Float, default=1.0)
     latitud = Column(Float, default=1.0)
+    num_cluster = Column(Integer, nullable=True)
 
 def create_db(path_to_db):
     engine = create_engine(path_to_db)
@@ -39,7 +49,6 @@ def retrieve_data(db='incidences.db', data='latitud, longitud', tipo='Accidente'
     conn = sqlite3.connect(db)
     query_result = conn.execute("SELECT {} FROM Incidencia WHERE tipo = '{}';".format(data, tipo))
     ret= [row for row in query_result]
-
     return ret
 
 def plot_data(data, labels = 'b', title= 'default'):
