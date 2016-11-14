@@ -21,7 +21,6 @@ def insert_values_in_incidences(session, accidents, labels):
 
 def insert_cluster_values(session):
     clusters = session.query(Incidencia.num_cluster).distinct().all()[1:]
-    print(clusters)
     for cluster in clusters:
         cl = Cluster(num_cluster=cluster[0])
         cl.accidents = s.query(func.count(Incidencia.id)).filter(
@@ -40,9 +39,7 @@ def insert_cluster_values(session):
 
 s = get_db_session('sqlite:///incidences.db')
 accidents = get_all_accidents(s)
-print(len(accidents))
 lat_and_lon = [accident[0:2] for accident in accidents]
 labels = obtain_dbscan_labels(s, lat_and_lon, eps=0.01, minimum_points=10)
 insert_values_in_incidences(s, accidents, labels)
 insert_cluster_values(s)
-print(labels)
