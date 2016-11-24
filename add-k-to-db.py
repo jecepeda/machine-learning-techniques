@@ -34,6 +34,10 @@ def insert_cluster_values(session):
         cl.carretera = s.query(func.max(Incidencia.carretera)).filter(
             Incidencia.num_cluster == cluster[0],
             Incidencia.carretera != 'unknown').first()[0]
+        cl.na_causa = s.query(func.count(Incidencia.causa)).filter(
+            Incidencia.causa == cl.causa_ppal,
+            Incidencia.num_cluster == cluster[0],
+            Incidencia.causa != 'unknown').first()[0]
         session.add(cl)
     session.commit()
 

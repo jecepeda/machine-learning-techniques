@@ -15,6 +15,7 @@ class ClusterN(Base):
     carretera = Column(Integer, default=0)
     causa_ppal = Column(Integer, default=0)
     na_causa = Column(Integer, default=0)
+    Hcluster = Column(Integer, default=0)
 
 class Cluster(Base):
     __tablename__ = "clusters"
