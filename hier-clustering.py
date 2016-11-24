@@ -25,7 +25,7 @@ avSim = np.average(matsim)
 print ("%s\t%6.2f" % ('Distancia Media', avSim))
 
 clusters = cluster.hierarchy.linkage(matsim, method = 'ward')
-cluster.hierarchy.dendrogram(clusters, color_threshold=0)
+cluster.hierarchy.dendrogram(clusters, color_threshold=10)
 plt.show()
 
 
