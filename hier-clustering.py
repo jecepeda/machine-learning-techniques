@@ -8,7 +8,6 @@ import sklearn.neighbors
 
 def retrieve_data(db='incidences.db'):
     conn = sqlite3.connect(db)
-    #query_result = conn.execute("SELECT * FROM ClustersN;")
     query_result = conn.execute("SELECT id, num_cluster, accidents, nivel_medio, carretera, causa_ppal, na_causa FROM ClustersN;")
     ret = [row for row in query_result]
     return ret
