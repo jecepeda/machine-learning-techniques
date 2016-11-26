@@ -6,6 +6,16 @@ from sqlalchemy import Column, Integer, String, DateTime, Float, create_engine
 from datetime import datetime
 
 Base = declarative_base()
+class ClusterN(Base):
+    __tablename__ = "clustersN"
+    id = Column(Integer, primary_key=True)
+    num_cluster = Column(Integer, default=0)
+    accidents = Column(Integer, default=0)
+    nivel_medio = Column(Integer, default=0)
+    carretera = Column(Integer, default=0)
+    causa_ppal = Column(Integer, default=0)
+    na_causa = Column(Integer, default=0)
+    Hcluster = Column(Integer, default=0)
 
 class Cluster(Base):
     __tablename__ = "clusters"
@@ -15,6 +25,8 @@ class Cluster(Base):
     nivel_medio = Column(String, default='unknown')
     carretera = Column(String, default='unknown')
     causa_ppal = Column(String, default='unknown')
+    na_causa = Column(Integer, default=0)
+
 
 class Incidencia(Base):
     __tablename__ = "incidencia"
