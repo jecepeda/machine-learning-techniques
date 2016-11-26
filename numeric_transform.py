@@ -38,7 +38,6 @@ def tf_carretera(a):
     return n
 
 def transform_db(session):
-
     clusters = session.query(Cluster.id).all()[:]
     for cluster in clusters:
         cln = ClusterN(num_cluster = cluster[0])
