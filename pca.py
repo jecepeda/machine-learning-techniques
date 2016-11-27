@@ -1,40 +1,27 @@
 from models import get_db_session,  Cluster
 from sklearn.decomposition import PCA
+import sklearn.cluster
+import numpy
+import matplotlib.pyplot as plt
 from sklearn import preprocessing
 
+def retrieve_data(db='incidences.db'):
+    conn = sqlite3.connect(db)
+    query_result = conn.execute("SELECT id, num_cluster, accidents, nivel_medio, carretera, causa_ppal, na_causa FROM ClustersN;")
+    ret = [row for row in query_result]
+    return ret
 
-#Get 
-states = [] #Get all data without labels in vectors, then into a vector
+states = retrieve_data()
 
 #Normalization
-minmaxscaler = preprocessing.MinMaxScaler()
+min_max_scaler = preprocessing.MinMaxScaler()
 states = min_max_scaler.fit_transform(states)
 print (states)
 
 #PCA Estimation
-estimator = PCA (n_components = 3) # Number of components left 
-Xpca = estimator.fit_transform(states)
-print (X_pca)
+estimator = PCA(n_components=3) # Number of components left
+X_pca = estimator.fit_transform(states)
+print(X_pca)
 
-#3. k-means clustering
-k = 3
-centroids, labels, z =  sklearn.cluster.k_means(states, k, init="k-means++" )
-
-#4.  plot 
-colors = ['blue', 'red', 'green']
-numbers = numpy.arange(len(X_pca))
-
-fig, ax = plt.subplots()
-
-for i in range(len(X_pca)):
-    plt.text(X_pca[i][0], X_pca[i][1], numbers[i], color=colors[labels[i]]) 
-   
-plt.xlim(-1, 4)
-plt.ylim(-0.2, 1)
-
-
-ax.grid(True)
-fig.tight_layout()
-
+plt.scatter([x[0] for x in X_pca], [x[1] for x in X_pca])
 plt.show()
-
