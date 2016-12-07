@@ -3,7 +3,6 @@ from sqlalchemy import func
 
 def tf_nivel_medio(a):
     n = 0
-
     if a == "Rojo":
         n = 5
     elif a == "Blanco":
@@ -48,7 +47,7 @@ def transform_db(session):
         cln.causa_ppal = tf_causa_ppal(s.query(Cluster.causa_ppal).filter(
                 Cluster.id == cluster[0]).first()[0])
         cln.carretera = tf_carretera(s.query(Cluster.carretera).filter(
-                Cluster.id == cluster[0]).first()[0])
+               Cluster.id == cluster[0]).first()[0])
         cln.na_causa = s.query(Cluster.na_causa).filter(
                 Cluster.id == cluster[0]).first()[0]
 
@@ -57,6 +56,3 @@ def transform_db(session):
 
 s = get_db_session('sqlite:///incidences.db')
 transform_db(s)
-
-
-
