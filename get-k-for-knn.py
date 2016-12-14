@@ -3,14 +3,15 @@ import sqlalchemy
 import random
 
 def get_all_accidents(session):
-    return s.query(Incidencia.longitud,
+    return s.query([Incidencia.longitud,
                    Incidencia.latitud,
                    Incidencia.id,
-                   Incidencia.num_cluster).filter(
+                    Incidencia.num_cluster]).filter(
                        Incidencia.tipo == 'Accidente').all()
 
 def split_database(session):
-    incidences = session.query(Incidencia.id).all()[:]
+    incidences = session.query(Incidencia.id).filter(
+        Incidencia.tipo == "Accidente").all()[:]
     for incidence in incidences:
         if (random.random() < 0.6):
             cln = Train()
