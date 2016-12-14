@@ -6,6 +6,20 @@ from sqlalchemy import Column, Integer, String, DateTime, Float, create_engine
 from datetime import datetime
 
 Base = declarative_base()
+class Train(Base):
+    __tablename__ = "train"
+    id = Column(Integer, primary_key=True)
+    longitud = Column(Float, default=1.0)
+    latitud = Column(Float, default=1.0)
+    num_cluster = Column(Integer, nullable=True)
+
+class Test(Base):
+    __tablename__ = "test"
+    id = Column(Integer, primary_key=True)
+    longitud = Column(Float, default=1.0)
+    latitud = Column(Float, default=1.0)
+    num_cluster = Column(Integer, nullable=True)
+
 class ClusterN(Base):
     __tablename__ = "clustersN"
     id = Column(Integer, primary_key=True)
