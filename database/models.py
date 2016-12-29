@@ -104,6 +104,26 @@ class HierarchicalCluster(Base):
     na_causa = Column(Integer, default=0)
 
 
+# In[ ]:
+
+class WorkZone(Base):
+    __tablename__ = "works"
+    
+    id = Column(Integer, primary_key=True)
+    num_cluster = Column(Integer, default=1)
+    autonomia = Column(String, default="unknown")
+    provincia = Column(String, default="unknown")
+    matricula = Column(String, default="unknown")
+    fechahora_ini = Column(DateTime, default=None)
+    nivel = Column(String, default="unknown")
+    carretera = Column(String, default="unknown")
+    pk_inicial = Column(Float, default=1)
+    pk_final = Column(Float, default=1)
+    sentido = Column(String, default=1)
+    longitud = Column(Float, default=1.0)
+    latitud = Column(Float, default=1.0)
+
+
 # In[9]:
 
 # Functions to create the database and obtain the session given a path
