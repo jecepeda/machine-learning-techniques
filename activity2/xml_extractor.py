@@ -152,7 +152,7 @@ def extract_data(data):
     return result
 
 
-# In[15]:
+# In[13]:
 
 def get_incidences_from_xml(f_path):
     '''
@@ -166,6 +166,8 @@ def get_incidences_from_xml(f_path):
 
     incidences = extract_data(raw_incidences)
     path_to_db = "../incidences.db"
+    if (len(sys.argv) == 2):
+        path_to_db = "../incidencesAux.db"
 
     if path.exists(path_to_db):
         remove(path_to_db)
@@ -176,7 +178,15 @@ def get_incidences_from_xml(f_path):
     insert_incidences_into_db(incidences, session)
 
 
-# In[16]:
+# In[14]:
 
-get_incidences_from_xml("../data/inc2006.xml")
+number_arguments = len(sys.argv)
+
+if number_arguments < 2:
+    get_incidences_from_xml("../data/inc2006.xml")
+elif number_arguments == 2:
+    print(sys.argv[1])
+    get_incidences_from_xml(sys.argv[1])
+else:
+    print("python xml_extractor.py [file path]")
 
